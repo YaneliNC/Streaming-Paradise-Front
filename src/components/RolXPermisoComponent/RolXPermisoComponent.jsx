@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from '../../contexts/UserContext';
-import './RolxPermisoComponent.css';
+import './RolXPermisoComponent.css';
 
 function RolxPermisoComponent() {
   const { idrol } = useParams(); // Se espera que el parámetro sea idrol
