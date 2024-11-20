@@ -46,7 +46,7 @@ const TopPaisesComponent = () => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/usuarios-top-paises')
+        axios.get('https://streaming-paradise-server.onrender.com/usuarios-top-paises')
             .then(response => {
                 const data = response.data;
 

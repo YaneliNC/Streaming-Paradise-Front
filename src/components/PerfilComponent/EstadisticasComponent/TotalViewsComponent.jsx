@@ -39,7 +39,7 @@ const TotalViewsComponent = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/comments/views/${userId}`);
+        const response = await axios.get(`https://streaming-paradise-server.onrender.com/comments/views/${userId}`);
         const totalVisualizaciones = response.data[0]?.total_visualizaciones || 0;
 
         setChartData({

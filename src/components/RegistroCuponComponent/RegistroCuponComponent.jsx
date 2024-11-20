@@ -27,7 +27,7 @@ function RegistroCuponComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/coupons/create", settings)
+    fetch("https://streaming-paradise-server.onrender.com/coupons/create", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

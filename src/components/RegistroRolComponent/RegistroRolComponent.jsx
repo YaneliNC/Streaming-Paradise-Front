@@ -19,7 +19,7 @@ function RegistroRolComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/roles/create", settings)
+    fetch("https://streaming-paradise-server.onrender.com/roles/create", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

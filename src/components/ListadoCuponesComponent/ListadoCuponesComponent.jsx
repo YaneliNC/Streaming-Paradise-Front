@@ -16,7 +16,7 @@ function ListadoCuponesComponent() {
   useEffect(() => {
     const fetchCupones = async () => {
       try {
-        const response = await fetch('http://localhost:5000/coupons/cupones'); 
+        const response = await fetch('https://streaming-paradise-server.onrender.com/coupons/cupones'); 
         const data = await response.json();
         console.log(data); // Verifica los datos recibidos
         setCupones(data);
@@ -40,7 +40,7 @@ function ListadoCuponesComponent() {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/coupons/${itemToDelete.idcupon}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/coupons/${itemToDelete.idcupon}`, {
         method: 'DELETE',
       });
 

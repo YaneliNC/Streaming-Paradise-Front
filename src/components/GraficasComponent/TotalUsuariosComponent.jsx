@@ -36,7 +36,7 @@ const TotalUsuariosComponent = () => {
       });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/total-usuarios')
+        axios.get('https://streaming-paradise-server.onrender.com/total-usuarios')
             .then(response => {
                 const totalUsuarios = response.data[0]?.total_usuarios || 0;
                 

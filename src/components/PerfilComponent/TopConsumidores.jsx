@@ -8,7 +8,7 @@ const TopConsumidores = ({ userId }) => {
     if (userId) {  // Cambiar userId por creatorId
       const fetchTopConsumidores = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/comments/top-interacciones/${userId}`);
+          const response = await fetch(`https://streaming-paradise-server.onrender.com/comments/top-interacciones/${userId}`);
           const data = await response.json();
           setTopConsumidores(data);
         } catch (error) {

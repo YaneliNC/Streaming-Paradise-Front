@@ -43,7 +43,7 @@ const PaquetesComponent = () => {
                 };
 
                 // Enviar una solicitud POST al backend con los detalles de la compra
-                fetch('http://localhost:5000/payments/capture', {  // Cambia esta URL por la de tu backend
+                fetch('https://streaming-paradise-server.onrender.com/payments/capture', {  // Cambia esta URL por la de tu backend
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',

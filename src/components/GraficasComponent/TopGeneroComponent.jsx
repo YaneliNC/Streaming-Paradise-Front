@@ -37,7 +37,7 @@ const TopGeneroComponent = () => {
   useEffect(() => {
     const fetchGeneros = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/top-generos-favoritos');
+        const response = await axios.get('https://streaming-paradise-server.onrender.com/top-generos-favoritos');
         const data = response.data;
 
         // Extraemos los nombres de los géneros y las cantidades

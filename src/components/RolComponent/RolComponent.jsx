@@ -18,7 +18,7 @@ function RolComponent() {
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await fetch('http://localhost:5000/roles/roles'); // URL para obtener los roles
+        const response = await fetch('https://streaming-paradise-server.onrender.com/roles/roles'); // URL para obtener los roles
         const data = await response.json();
         console.log(data); // Verifica los datos recibidos
         setRoles(data);
@@ -42,7 +42,7 @@ function RolComponent() {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/roles/${itemToDelete.idrol}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/roles/${itemToDelete.idrol}`, {
         method: 'DELETE',
       });
 

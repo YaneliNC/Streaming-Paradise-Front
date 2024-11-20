@@ -16,7 +16,7 @@ const EditarUsuarioComponent = ({ userId, setEditVisible }) => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:5000/users/${userId}`)
+      fetch(`https://streaming-paradise-server.onrender.com/users/${userId}`)
         .then(response => {
           if (response.ok) {
             return response.json();
@@ -58,7 +58,7 @@ const EditarUsuarioComponent = ({ userId, setEditVisible }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/users/${userId}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ const FilterBarComponent = ({ onGenreChange, onFilterChange }) => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/videos/genres");
+        const response = await axios.get("https://streaming-paradise-server.onrender.com/videos/genres");
         setGenres(["Todos los Géneros", ...response.data]);
       } catch (error) {
         console.error("Error fetching genres:", error);

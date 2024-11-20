@@ -9,7 +9,7 @@ const Comments = ({ userId }) => {
     if (userId) {
       const fetchComments = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/comments/miscomentarios/${userId}`);
+          const response = await fetch(`https://streaming-paradise-server.onrender.com/comments/miscomentarios/${userId}`);
           const data = await response.json();
           setComments(data);
         } catch (error) {

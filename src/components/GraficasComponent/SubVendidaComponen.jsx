@@ -32,7 +32,7 @@ const SubVendidaComponent = () => {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/top-idsub-compras')
+    axios.get('https://streaming-paradise-server.onrender.com/top-idsub-compras')
       .then(response => {
         const data = response.data[0]; // Como se espera un solo resultado
         const nombreSub = data.nombre_sub;

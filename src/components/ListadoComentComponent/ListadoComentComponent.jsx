@@ -13,7 +13,7 @@ function ListadoComentComponent() {
   useEffect(() => {
     const fetchComentarios = async () => {
       try {
-        const response = await fetch('http://localhost:5000/contacto');  // Cambié la URL
+        const response = await fetch('https://streaming-paradise-server.onrender.com/contacto');  // Cambié la URL
         if (!response.ok) {
           throw new Error('Error en la respuesta del servidor');
         }

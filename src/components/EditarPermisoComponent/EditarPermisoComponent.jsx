@@ -10,7 +10,7 @@ function EditarPermisoComponent() {
 
   // Función para cargar los datos del permiso existente
   useEffect(() => {
-    fetch(`http://localhost:5000/permissions/${id}`)
+    fetch(`https://streaming-paradise-server.onrender.com/permissions/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error al obtener los datos del permiso');
@@ -42,7 +42,7 @@ function EditarPermisoComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch(`http://localhost:5000/permissions/${id}`, settings)
+    fetch(`https://streaming-paradise-server.onrender.com/permissions/${id}`, settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

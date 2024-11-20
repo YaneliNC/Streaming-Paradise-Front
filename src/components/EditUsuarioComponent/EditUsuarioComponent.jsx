@@ -17,7 +17,7 @@ const EditUsuarioComponent = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/users/${id}`)
+      fetch(`https://streaming-paradise-server.onrender.com/users/${id}`)
         .then(response => {
           if (response.ok) {
             return response.json();
@@ -61,7 +61,7 @@ const EditUsuarioComponent = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/users/${id}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/users/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

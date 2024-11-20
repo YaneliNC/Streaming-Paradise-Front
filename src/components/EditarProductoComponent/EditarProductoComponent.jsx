@@ -20,7 +20,7 @@ function EditarProductoComponent() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/subscriptions/${id}`)
+    fetch(`https://streaming-paradise-server.onrender.com/subscriptions/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error al obtener los datos');
@@ -63,7 +63,7 @@ function EditarProductoComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch(`http://localhost:5000/subscriptions/${id}`, settings)
+    fetch(`https://streaming-paradise-server.onrender.com/subscriptions/${id}`, settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

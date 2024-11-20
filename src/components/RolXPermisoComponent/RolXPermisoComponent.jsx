@@ -17,7 +17,7 @@ function RolxPermisoComponent() {
     // Cargar lista de permisos disponibles
     const fetchPermisos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/permissions/permisos');
+        const response = await axios.get('https://streaming-paradise-server.onrender.com/permissions/permisos');
         setPermisos(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -29,7 +29,7 @@ function RolxPermisoComponent() {
     // Cargar permisos asignados al rol
     const fetchPermisosAsignados = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/role-permission/rolxpermiso/${idrol}`);
+        const response = await axios.get(`https://streaming-paradise-server.onrender.com/role-permission/rolxpermiso/${idrol}`);
         const permisosAsignados = response.data.map(permiso => permiso.idpermiso);
         setPermisosSeleccionados(permisosAsignados);
         setPermisosAsignados(permisosAsignados);
@@ -55,8 +55,8 @@ function RolxPermisoComponent() {
 
   // Definición de la función handleGuardar
   const handleGuardar = async () => {
-    const urlAgregar = `http://localhost:5000/role-permission/assign`;
-    const urlEliminar = `http://localhost:5000/role-permission/eliminar-rolxpermiso`;
+    const urlAgregar = `https://streaming-paradise-server.onrender.com/role-permission/assign`;
+    const urlEliminar = `https://streaming-paradise-server.onrender.com/role-permission/eliminar-rolxpermiso`;
 
     const permisosNuevos = permisosSeleccionados.filter(idpermiso => !permisosAsignados.includes(idpermiso));
     const permisosEliminar = permisosAsignados.filter(idpermiso => !permisosSeleccionados.includes(idpermiso));

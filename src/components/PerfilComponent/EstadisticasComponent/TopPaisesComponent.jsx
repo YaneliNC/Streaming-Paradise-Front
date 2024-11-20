@@ -30,7 +30,7 @@ const TopPaisesComponent = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/comments/userpais/${userId}`);
+        const response = await axios.get(`https://streaming-paradise-server.onrender.com/comments/userpais/${userId}`);
         const data = response.data;
 
         // Extraer los nombres de los países y los porcentajes

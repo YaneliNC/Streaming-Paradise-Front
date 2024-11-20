@@ -22,7 +22,7 @@ function NavbarComponent({ toggleTheme, darkMode }) {  // Recibimos toggleTheme 
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/users/logout', {
+      const response = await axios.post('https://streaming-paradise-server.onrender.com/users/logout', {
         remember_token: user.remember_token 
       });
       if (response.status === 200) {

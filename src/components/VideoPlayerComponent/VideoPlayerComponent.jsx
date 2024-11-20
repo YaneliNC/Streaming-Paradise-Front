@@ -24,11 +24,11 @@ const VideoPlayerComponent = ({ random }) => {
       try {
         let video;
         if (random || location.pathname === "/sorprendeme") {
-          const response = await fetch("http://localhost:5000/videos");
+          const response = await fetch("https://streaming-paradise-server.onrender.com/videos");
           const videos = await response.json();
           video = videos[Math.floor(Math.random() * videos.length)];
         } else {
-          const response = await fetch(`http://localhost:5000/videos/${id}`);
+          const response = await fetch(`https://streaming-paradise-server.onrender.com/videos/${id}`);
           video = await response.json();
         }
 
@@ -40,11 +40,11 @@ const VideoPlayerComponent = ({ random }) => {
           await fetchSuggestions(video.genero, video.idvideo);
         }
 
-        const creatorResponse = await fetch(`http://localhost:5000/users/${video.creatorId}`);
+        const creatorResponse = await fetch(`https://streaming-paradise-server.onrender.com/users/${video.creatorId}`);
         const creatorData = await creatorResponse.json();
         setCreatorName(creatorData.name);
 
-        const commentsResponse = await fetch(`http://localhost:5000/comments/video/${video.idvideo}`);
+        const commentsResponse = await fetch(`https://streaming-paradise-server.onrender.com/comments/video/${video.idvideo}`);
         const commentsData = await commentsResponse.json();
         setComments(commentsData);
       } catch (error) {
@@ -57,7 +57,7 @@ const VideoPlayerComponent = ({ random }) => {
 
   const incrementViews = async (videoId) => {
     try {
-      const response = await fetch(`http://localhost:5000/videos/increment-views/${videoId}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/videos/increment-views/${videoId}`, {
         method: "POST",
       });
       const data = await response.json();
@@ -71,7 +71,7 @@ const VideoPlayerComponent = ({ random }) => {
 
   const fetchSuggestions = async (genre, idvideoActual) => {
     try {
-      const response = await fetch(`http://localhost:5000/videos?genero=${genre}&excludeId=${idvideoActual}`);
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/videos?genero=${genre}&excludeId=${idvideoActual}`);
       const suggestedVideos = await response.json();
       setSuggestedVideos(suggestedVideos);
     } catch (error) {
@@ -82,7 +82,7 @@ const VideoPlayerComponent = ({ random }) => {
   const handleAddComment = async () => {
     if (newComment.trim() && user) {
       try {
-        const response = await fetch("http://localhost:5000/comments", {
+        const response = await fetch("https://streaming-paradise-server.onrender.com/comments", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -108,7 +108,7 @@ const VideoPlayerComponent = ({ random }) => {
     setRating(newRating);
     if (user) {
       try {
-        const response = await fetch("http://localhost:5000/ratings", {
+        const response = await fetch("https://streaming-paradise-server.onrender.com/ratings", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

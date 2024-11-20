@@ -14,7 +14,7 @@ function ListadoComprasComponent() {
   useEffect(() => {
     const fetchCompras = async () => {
       try {
-        const response = await fetch('http://localhost:5000/purchase/compras');
+        const response = await fetch('https://streaming-paradise-server.onrender.com/purchase/compras');
         if (!response.ok) {
           throw new Error('Error en la respuesta del servidor');
         }

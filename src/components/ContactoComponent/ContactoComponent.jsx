@@ -12,7 +12,7 @@ const ContactoComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/contact", {
+      const response = await axios.post("https://streaming-paradise-server.onrender.com/api/contact", {
         nombre,
         correo,
         mensaje,

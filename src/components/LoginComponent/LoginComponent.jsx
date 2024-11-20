@@ -43,7 +43,7 @@ const LoginComponent = ({ handleNavbar, handleFooter }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/users/login", { email, password });
+      const response = await axios.post("https://streaming-paradise-server.onrender.com/users/login", { email, password });
       
       if (response.data && response.data.rememberToken && response.data.user) {
         const { rememberToken, user } = response.data;

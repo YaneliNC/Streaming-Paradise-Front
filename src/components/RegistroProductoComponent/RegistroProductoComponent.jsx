@@ -32,7 +32,7 @@ function RegistroProductoComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/subscriptions/nuevasub", settings)
+    fetch("https://streaming-paradise-server.onrender.com/subscriptions/nuevasub", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

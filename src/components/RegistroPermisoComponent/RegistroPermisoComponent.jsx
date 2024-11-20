@@ -21,7 +21,7 @@ function RegistroPermisoComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/permissions/create", settings)
+    fetch("https://streaming-paradise-server.onrender.com/permissions/create", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

@@ -16,7 +16,7 @@ function ListadoUsuarioComponent() {
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users/user');
+        const response = await fetch('https://streaming-paradise-server.onrender.com/users/user');
         const data = await response.json();
         setUsuarios(data);
         setIsLoading(false);
@@ -39,7 +39,7 @@ function ListadoUsuarioComponent() {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/users/${userToDelete}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/users/${userToDelete}`, {
         method: 'DELETE',
       });
 

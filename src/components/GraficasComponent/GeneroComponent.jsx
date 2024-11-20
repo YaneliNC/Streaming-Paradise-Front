@@ -38,7 +38,7 @@ const GeneroComponent = () => {
       });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/usuarios-genero')
+    axios.get('https://streaming-paradise-server.onrender.com/usuarios-genero')
       .then(response => {
         const data = response.data;
         

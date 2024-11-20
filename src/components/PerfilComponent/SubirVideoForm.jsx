@@ -37,7 +37,7 @@ function SubirVideoForm({ setFormVisible }) {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/videos/create", settings)
+    fetch("https://streaming-paradise-server.onrender.com/videos/create", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

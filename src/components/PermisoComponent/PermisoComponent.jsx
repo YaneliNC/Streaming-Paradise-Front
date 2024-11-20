@@ -16,7 +16,7 @@ function PermisoComponent() {
   useEffect(() => {
     const fetchPermisos = async () => {
       try {
-        const response = await fetch('http://localhost:5000/permissions/permisos'); // URL para obtener los permisos
+        const response = await fetch('https://streaming-paradise-server.onrender.com/permissions/permisos'); // URL para obtener los permisos
         const data = await response.json();
         console.log(data); // Verifica los datos recibidos
         setPermisos(data);
@@ -40,7 +40,7 @@ function PermisoComponent() {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/permissions/${itemToDelete.idpermiso}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/permissions/${itemToDelete.idpermiso}`, {
         method: 'DELETE',
       });
 

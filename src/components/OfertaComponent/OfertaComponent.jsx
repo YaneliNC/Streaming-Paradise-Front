@@ -80,7 +80,7 @@ function OfertaComponent() {
   useEffect(() => {
     const fetchOfertas = async () => {
       try {
-        const response = await fetch('http://localhost:5000/offers/ofertas'); 
+        const response = await fetch('https://streaming-paradise-server.onrender.com/offers/ofertas'); 
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -109,7 +109,7 @@ function OfertaComponent() {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/offers/${itemToDelete.idoffer}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/offers/${itemToDelete.idoffer}`, {
         method: 'DELETE',
       });
 

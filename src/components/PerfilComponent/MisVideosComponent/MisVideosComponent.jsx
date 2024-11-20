@@ -15,7 +15,7 @@ const MisVideosComponent = ({ userId }) => {
       if (!userId) return;
 
       try {
-        const response = await fetch(`http://localhost:5000/videos/user/${userId}`);
+        const response = await fetch(`https://streaming-paradise-server.onrender.com/videos/user/${userId}`);
         const data = await response.json();
 
         if (Array.isArray(data)) {
@@ -56,7 +56,7 @@ const MisVideosComponent = ({ userId }) => {
 
   const handleDeleteVideo = async (videoId) => {
     try {
-      const response = await fetch(`http://localhost:5000/videos/${videoId}`, {
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/videos/${videoId}`, {
         method: "DELETE",
       });
 

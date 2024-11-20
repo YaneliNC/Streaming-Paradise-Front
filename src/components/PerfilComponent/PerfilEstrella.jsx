@@ -53,7 +53,7 @@ function PerfilEstrella() {
     const confirmLogout = window.confirm('¿Seguro quieres cerrar la sesión?');
     if (confirmLogout) {
       try {
-        const response = await axios.post('http://localhost:5000/users/logout', {
+        const response = await axios.post('https://streaming-paradise-server.onrender.com/users/logout', {
           remember_token: user.remember_token 
         });
         if (response.status === 200) {

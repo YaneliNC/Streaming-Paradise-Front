@@ -13,7 +13,7 @@ function RegistroOfertaComponent() {
 
   // Función para obtener las suscripciones desde el backend
   useEffect(() => {
-    fetch('http://localhost:5000/subscriptions/all')
+    fetch('https://streaming-paradise-server.onrender.com/subscriptions/all')
       .then(response => response.json())
       .then(data => setSubscriptions(data))
       .catch(error => console.error('Error al obtener suscripciones:', error));
@@ -36,7 +36,7 @@ function RegistroOfertaComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/offers/create", settings)
+    fetch("https://streaming-paradise-server.onrender.com/offers/create", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

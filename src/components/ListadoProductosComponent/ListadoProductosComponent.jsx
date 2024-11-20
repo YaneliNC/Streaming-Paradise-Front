@@ -16,7 +16,7 @@ function ListadoProductosComponent() {
   useEffect(() => {
     const fetchSubscriptions = async () => {
       try {
-        const response = await fetch('http://localhost:5000/subscriptions/all'); 
+        const response = await fetch('https://streaming-paradise-server.onrender.com/subscriptions/all'); 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -42,7 +42,7 @@ function ListadoProductosComponent() {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/subscriptions/${subscriptionToDelete}`, { 
+      const response = await fetch(`https://streaming-paradise-server.onrender.com/subscriptions/${subscriptionToDelete}`, { 
         method: 'DELETE',
       });
 

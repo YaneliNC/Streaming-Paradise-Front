@@ -43,7 +43,7 @@ const EdadesComponent = () => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/usuarios-rango-edad')
+        axios.get('https://streaming-paradise-server.onrender.com/usuarios-rango-edad')
             .then(response => {
                 const data = response.data;
                 const edades = data.map(item => item.rango_edad); // Rango de edades

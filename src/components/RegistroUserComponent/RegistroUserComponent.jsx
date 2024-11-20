@@ -16,7 +16,7 @@ function RegistroUserComponent() {
 
   useEffect(() => {
     // Obtener los roles del servidor
-    fetch("http://localhost:5000/roles/roles")
+    fetch("https://streaming-paradise-server.onrender.com/roles/roles")
       .then((response) => response.json())
       .then((data) => {
         setRoles(data);
@@ -49,7 +49,7 @@ function RegistroUserComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch("http://localhost:5000/users/register", settings)
+    fetch("https://streaming-paradise-server.onrender.com/users/register", settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

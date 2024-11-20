@@ -21,7 +21,7 @@ function EditarVideoForm() {
     }
 
     if (videoId && user) {
-      fetch(`http://localhost:5000/videos/${videoId}`)
+      fetch(`https://streaming-paradise-server.onrender.com/videos/${videoId}`)
         .then((response) => {
           if (!response.ok) throw new Error("Video no encontrado");
           return response.json();
@@ -49,7 +49,7 @@ function EditarVideoForm() {
       creatorId: user ? user.id : null,
     };
 
-    fetch(`http://localhost:5000/videos/${videoId}`, {
+    fetch(`https://streaming-paradise-server.onrender.com/videos/${videoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

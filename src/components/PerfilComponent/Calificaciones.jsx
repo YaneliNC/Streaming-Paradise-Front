@@ -10,7 +10,7 @@ const Calificaciones = ({ userId }) => {
     if (userId) {
       const fetchCalificaciones = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/comments/miscalificaciones/${userId}`);
+          const response = await fetch(`https://streaming-paradise-server.onrender.com/comments/miscalificaciones/${userId}`);
           const data = await response.json();
           setCalificaciones(data);
         } catch (error) {

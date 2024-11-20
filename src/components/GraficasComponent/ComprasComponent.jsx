@@ -71,7 +71,7 @@ const ComprasComponent = () => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/total-compras')
+        axios.get('https://streaming-paradise-server.onrender.com/total-compras')
             .then(response => {
                 const data = response.data;
 

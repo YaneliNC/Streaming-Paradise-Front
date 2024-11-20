@@ -38,7 +38,7 @@ const GeneroVideosComponent = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/comments/generovideo/${userId}`);
+        const response = await axios.get(`https://streaming-paradise-server.onrender.com/comments/generovideo/${userId}`);
         const data = response.data;
 
         setChartData({

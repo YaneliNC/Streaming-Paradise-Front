@@ -9,7 +9,7 @@ function EditarRolComponent() {
 
   // Función para cargar los datos del rol existente
   useEffect(() => {
-    fetch(`http://localhost:5000/roles/${id}`)
+    fetch(`https://streaming-paradise-server.onrender.com/roles/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error al obtener los datos del rol');
@@ -40,7 +40,7 @@ function EditarRolComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch(`http://localhost:5000/roles/${id}`, settings)
+    fetch(`https://streaming-paradise-server.onrender.com/roles/${id}`, settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {

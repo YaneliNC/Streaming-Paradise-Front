@@ -39,7 +39,7 @@ const TotalUsuariosComponent = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/comments/users/${userId}`);
+        const response = await axios.get(`https://streaming-paradise-server.onrender.com/comments/users/${userId}`);
         const totalUsuarios = response.data[0]?.total_usuarios || 0;
 
         setChartData({

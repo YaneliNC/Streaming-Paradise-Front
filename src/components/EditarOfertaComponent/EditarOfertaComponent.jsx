@@ -14,7 +14,7 @@ function EditarOfertaComponent() {
 
   // Obtener las suscripciones desde el backend
   useEffect(() => {
-    fetch('http://localhost:5000/subscriptions/all')
+    fetch('https://streaming-paradise-server.onrender.com/subscriptions/all')
       .then(response => response.json())
       .then(data => setSubscriptions(data))
       .catch(error => console.error('Error al obtener suscripciones:', error));
@@ -22,7 +22,7 @@ function EditarOfertaComponent() {
 
   // Obtener los datos de la oferta a editar
   useEffect(() => {
-    fetch(`http://localhost:5000/offers/${id}`)
+    fetch(`https://streaming-paradise-server.onrender.com/offers/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error al obtener los datos de la oferta');
@@ -59,7 +59,7 @@ function EditarOfertaComponent() {
       body: JSON.stringify(dataToSend),
     };
 
-    fetch(`http://localhost:5000/offers/${id}`, settings)
+    fetch(`https://streaming-paradise-server.onrender.com/offers/${id}`, settings)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((errorData) => {
