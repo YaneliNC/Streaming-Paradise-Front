@@ -50,7 +50,7 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className={`admin-sidebar ${isExpanded ? 'expanded-ad' : "collapsed-ad"}`}>
+    <div className={`admin-sidebar ${isExpanded ? 'expanded-ad' : ""}`}>
       <button className="expand-button-ad" onClick={toggleSidebar}>
         {isExpanded ? <IoChevronBackOutline /> : <IoChevronForwardOutline />}
       </button>
