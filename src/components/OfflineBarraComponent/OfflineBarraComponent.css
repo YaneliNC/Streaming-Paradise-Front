@@ -1,0 +1,25 @@
+.offline-banner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ff6f61;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-family: 'Figtree-Medium', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050; /* Asegúrate de que el valor sea mayor que el del NavbarComponent */
+  }
+  
+  .offline-banner p {
+    margin: 0 10px;
+    font-size: 1.2rem;
+  }
+  
+  .offline-icon {
+    font-size: 1.8rem;
+    margin-right: 10px;
+  }
+  

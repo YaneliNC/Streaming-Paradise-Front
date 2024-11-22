@@ -26,6 +26,16 @@ import Calificaciones from './components/PerfilComponent/Calificaciones';
 import TopConsumidores from './components/PerfilComponent/TopConsumidores';
 import EditarUsuarioComponent from "./components/PerfilComponent/EditarUsuarioComponent";
 import EditarVideoForm from "./components/PerfilComponent/EditarVideoForm";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
+const notyf = new Notyf({
+  position: {
+    x: 'left', 
+    y: 'bottom'   
+  },
+  dismissible: true,
+});
 
 
 function App() {
@@ -33,6 +43,8 @@ function App() {
   const [footerFlag, setFooterFlag] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
+
+  
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -40,6 +52,29 @@ function App() {
   useEffect(() => {
     document.body.className = darkMode ? "dark-mode" : "light-mode";
   }, [darkMode]);
+
+  useEffect(() => {
+    
+    // Función para mostrar alerta cuando no hay conexión
+    const handleOffline = () => {
+      notyf.error('En este momento no tienes conexión.');
+    };
+
+    // Función para cuando se restablece la conexión
+    const handleOnline = () => {
+      notyf.success('Se restauró la conexión a internet.');
+    };
+
+    // Añadir los event listeners para conexión y desconexión
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    // Limpiar los event listeners cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
+  }, []);
 
   return (
     <UserProvider>
