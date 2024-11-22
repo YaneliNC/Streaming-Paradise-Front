@@ -11,8 +11,8 @@ export default defineConfig({
         name: 'Streaming Paradise',
         short_name: 'StreamParadise',
         description: 'Disfruta de los mejores contenidos en Streaming Paradise.',
-        theme_color: '#000000',
-        background_color: '#ffffff',
+        theme_color: '#ffa500',
+        background_color: '#00063D',
         display: 'standalone',
         start_url: '/',
         icons: [
