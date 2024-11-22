@@ -96,6 +96,7 @@
   aspect-ratio: 16/9;
   object-fit: contain;
   margin-top: 20px;
+  margin-bottom: 100px;
 }
 
 .video-info {
