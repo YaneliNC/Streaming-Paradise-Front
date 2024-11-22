@@ -95,7 +95,7 @@
   width: 100% !important;
   aspect-ratio: 16/9;
   object-fit: contain;
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 .video-info {
@@ -104,8 +104,8 @@
   padding: 10px;
   background-color: #1c1c1c;
   color: #f1f1f1;
-  margin-top: 100px; /* Ajusta el margen superior para crear separación */
-  margin-bottom: 20px;
+  margin-top: 20px; /* Ajusta el margen superior para crear separación */
+  margin-bottom: 100px;
   border-radius: 8px;
 }
 
