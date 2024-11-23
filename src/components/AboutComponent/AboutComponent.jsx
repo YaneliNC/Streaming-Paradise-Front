@@ -74,7 +74,7 @@ const AboutComponent = () => {
           <div className="team-member">
             <img src={Persona1} alt="Nombre del Integrante 1" />
             <h3>Eduardo Uc</h3>
-            <p>Lider del equipo de Backend</p>
+            <p>Lider del equipo y Backend</p>
           </div>
           <div className="team-member">
             <img src={Persona2} alt="Nombre del Integrante 2" />
@@ -84,17 +84,17 @@ const AboutComponent = () => {
           <div className="team-member">
             <img src={Persona3} alt="Nombre del Integrante 3" />
             <h3>Cristian Cetz</h3>
-            <p>Area de Front-end</p>
+            <p>Area de Front-end y Paypal</p>
           </div>
           <div className="team-member">
             <img src={Persona4} alt="Nombre del Integrante 4" />
             <h3>M.Martinez</h3>
-            <p>Lider del equipo de Front-end</p>
+            <p>Lider de equipo Front-end</p>
           </div>
           <div className="team-member">
             <img src={Persona5} alt="Nombre del Integrante 5" />
             <h3>M.E.C.Y</h3>
-            <p>Area de Front-end</p>
+            <p>Area de Front-end y diseños</p>
           </div>
         </div>
       </section>
