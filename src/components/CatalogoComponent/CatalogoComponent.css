@@ -163,3 +163,8 @@
   background-color: #888;
   font-weight: bold;
 }
+.viewed-text {
+  color: green;
+  font-style: italic;
+  margin-top: 5px;
+}

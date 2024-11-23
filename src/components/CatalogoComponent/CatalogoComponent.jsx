@@ -84,30 +84,36 @@ const CatalogoComponent = ({ handleFooter }) => {
 
       {/* Contenido de los videos */}
       <div id="hits">
-        {filteredVideos.map((video, index) => {
-          const isViewed = viewedVideos.has(video.idvideo);
-          return (
-            <article
-              key={index}
-              className={`video-card ${isViewed ? "viewed" : ""}`}
-              onClick={() => handleVideoClick(video.idvideo)}
-            >
-              <iframe
-                className="video-frame"
-                src={`https://www.youtube.com/embed/${getYouTubeID(video.url)}`}
-                title={video.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              <div className="video-meta">
-                <h3 className="video-title">{video.title}</h3>
-                <p className="video-description">{video.descripcion}</p>
-                <span className="video-genre">{video.genero}</span>
-              </div>
-            </article>
-          );
-        })}
+      {filteredVideos.map((video, index) => {
+  const isViewed = viewedVideos.has(video.idvideo);
+  return (
+    <article
+      key={index}
+      className={`video-card ${isViewed ? "viewed" : ""}`}
+      onClick={() => handleVideoClick(video.idvideo)}
+    >
+      <iframe
+        className="video-frame"
+        src={`https://www.youtube.com/embed/${getYouTubeID(video.url)}`}
+        title={video.title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="video-meta">
+        <h3 className="video-title">{video.title}</h3>
+        <p className="video-description">{video.descripcion}</p>
+        <span className="video-genre">{video.genero}</span>
+        {/* Muestra el texto solo si el video ha sido visto */}
+        {isViewed && (
+          <p className="viewed-text">
+            Este video ya ha sido visualizado.
+          </p>
+        )}
+      </div>
+    </article>
+  );
+})}
       </div>
     </div>
   );
