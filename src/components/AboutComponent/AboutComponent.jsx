@@ -74,27 +74,27 @@ const AboutComponent = () => {
           <div className="team-member">
             <img src={Persona1} alt="Nombre del Integrante 1" />
             <h3>Eduardo Uc</h3>
-            <p>Puesto del Integrante 1</p>
+            <p>Lider del equipo de Backend</p>
           </div>
           <div className="team-member">
             <img src={Persona2} alt="Nombre del Integrante 2" />
             <h3>Yaneli</h3>
-            <p>Puesto del Integrante 2</p>
+            <p>Area de Backend y PWA</p>
           </div>
           <div className="team-member">
             <img src={Persona3} alt="Nombre del Integrante 3" />
             <h3>Cristian Cetz</h3>
-            <p>Puesto del Integrante 3</p>
+            <p>Area de Front-end</p>
           </div>
           <div className="team-member">
             <img src={Persona4} alt="Nombre del Integrante 4" />
             <h3>M.Martinez</h3>
-            <p>Puesto del Integrante 4</p>
+            <p>Lider del equipo de Front-end</p>
           </div>
           <div className="team-member">
             <img src={Persona5} alt="Nombre del Integrante 5" />
             <h3>M.E.C.Y</h3>
-            <p>Puesto del Integrante 5</p>
+            <p>Area de Front-end</p>
           </div>
         </div>
       </section>
