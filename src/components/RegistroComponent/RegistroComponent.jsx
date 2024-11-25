@@ -154,10 +154,18 @@ const RegistroComponent = ({ handleNavbar, handleFooter }) => {
                 <option value="Musica">Musica</option>
                 <option value="Gameplays">Gameplays</option>
                 <option value="Trailers">Trailers</option>
-                <option value="Reseñas de productos">Reseñas de productos</option>
+                <option value="Reseñas">Reseñas</option>
                 <option value="Unboxing">Unboxing</option>
-                <option value="Vídeos formativos">Vídeos formativos</option>
+                <option value="Educativo">Educativo</option>
                 <option value="Anime">Anime</option>
+                <option value="Opening">Opening</option>
+                <option value="Cover">Cover</option>
+                <option value="Viajes">Viajes</option>
+                <option value="Originales">Originales</option>
+                <option value="Curiosidades">Curiosidades</option>
+                <option value="Comedia">Comedia</option>
+                <option value="Documentales">Documentales</option>
+                <option value="Variedad">Variedad</option>
               </select>
 
               <button type="submit" className="login-button">Registrarse</button>
