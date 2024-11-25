@@ -31,7 +31,6 @@ const GeneroComponent = ({ userId }) => {
   });
 
   useEffect(() => {
-    // Verifica que el userId esté disponible
     if (userId) {
       axios
         .get(`https://streaming-paradise-server.onrender.com/comments/usergenero/${userId}`)
