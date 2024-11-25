@@ -9,7 +9,7 @@ const GeneroComponent = ({ userId }) => {
     options: {
       chart: {
         type: 'pie',
-        height: 220,
+        height: 230,
       },
       labels: ['Femenino', 'Masculino'],
       colors: ['#FF69B4', '#1E90FF'],
@@ -27,32 +27,27 @@ const GeneroComponent = ({ userId }) => {
           vertical: 5,
         },
       },
-      title: {
-        text: 'Estadísticas de Género',
-        align: 'center',
-        style: {
-          fontSize: '18px',
-          fontWeight: 'bold',
-        },
-      },
     },
   });
 
   useEffect(() => {
     // Verifica que el userId esté disponible
     if (userId) {
-      axios.get(`https://streaming-paradise-server.onrender.com/comments/usergenero/${userId}`)
+      axios
+        .get(`https://streaming-paradise-server.onrender.com/comments/usergenero/${userId}`)
         .then(response => {
           const data = response.data;
 
-          // Aseguramos que `data` sea un arreglo y contenga `genero_usuario` y `videos_vistos`
+          // Aseguramos que `data` sea un arreglo y contenga `genero_usuario` y `usuarios_que_vieron`
           if (Array.isArray(data)) {
-            const masculino = data.find(item => item.genero_usuario.toLowerCase() === 'masculino')?.videos_vistos || 0;
-            const femenino = data.find(item => item.genero_usuario.toLowerCase() === 'femenino')?.videos_vistos || 0;
+            const Masculino =
+              parseInt(data.find(item => item.genero_usuario === 'Masculino')?.usuarios_que_vieron) || 0;
+            const Femenino =
+              parseInt(data.find(item => item.genero_usuario === 'Femenino')?.usuarios_que_vieron) || 0;
 
             setChartData(prevData => ({
               ...prevData,
-              series: [femenino, masculino], // Actualiza los datos de la serie
+              series: [Femenino, Masculino], // Actualiza los datos de la serie
             }));
           } else {
             console.error('Los datos obtenidos no son un arreglo válido');
@@ -71,7 +66,7 @@ const GeneroComponent = ({ userId }) => {
         options={chartData.options}
         series={chartData.series}
         type="pie"
-        height="210"
+        height="230"
       />
     </div>
   );

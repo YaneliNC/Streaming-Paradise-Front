@@ -179,20 +179,22 @@ function RegistroUserComponent() {
             </select>
           </div>
           <div>
-            <select
-              name="idrol"
-              id="inputRole"
-              value={selectedRole}
-              onChange={(event) => setSelectedRole(event.target.value)}
-              required
-            >
-              {roles.map((role) => (
-                <option key={role.idrol} value={role.idrol}>
-                  {role.idrol === 1 ? "Administrador" : "Creador"}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            name="idrol"
+            id="inputRole"
+            value={selectedRole}
+            onChange={(event) => setSelectedRole(event.target.value)}
+            required
+          >
+            <option value="">Selecciona un rol</option>
+            {roles.map((role) => (
+              <option key={role.idrol} value={role.idrol}>
+                {role.nomrol} {/* Aquí se usa el campo nomrol para mostrar el nombre */}
+              </option>
+            ))}
+          </select>
+        </div>
+
           <br />
           <div className="buttons-registrouser">
             <button className="button-regis-registrouser" type="submit">Agregar</button>
