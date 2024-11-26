@@ -19,6 +19,29 @@ const VideoPlayerComponent = ({ random }) => {
   const [views, setViews] = useState(0);
   const [suggestedVideos, setSuggestedVideos] = useState([]);
 
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  // Nuevo useEffect para manejar la conexión a Internet
+  useEffect(() => {
+    const handleOffline = () => {
+      setIsOffline(true);
+      localStorage.setItem('isOffline', 'true');
+    };
+
+    const handleOnline = () => {
+      setIsOffline(false);
+      localStorage.setItem('isOffline', 'false');
+    };
+
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
+  }, []);
+
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
@@ -137,72 +160,97 @@ const VideoPlayerComponent = ({ random }) => {
 
   return (
     <div className="video-layout">
-      <div className="video-player-section">
-        <div className="video-player-wrapper">
-          <ReactPlayer url={videoData.url} controls width="100%" className="video-player" />
-        </div>
-        <div className="video-info">
-          <h2 className="video-title">{videoData.title}</h2>
-          <p className="video-creator">Subido por: {creatorName}</p>
-          <p className="video-description">{videoData.descripcion}</p>
-          <p>Visitas: {views}</p>
-          <div className="star-rating">
-            <ReactStars
-              count={5}
-              value={rating}
-              onChange={ratingChanged}
-              size={24}
-              half={true}
-              color2={"#ffd700"}
-            />
+      {isOffline ? (
+        <div className="no-internet-container">
+          <div className="icon-container">
+            <MdWifiOff size={80} color="#FF6347" />
           </div>
-          <p>Calificación: {rating} estrellas</p>
+          <h2 className="message">¡Oops! Sin conexión a Internet</h2>
+          <p className="sub-message">Por favor, verifica tu conexión e inténtalo nuevamente.</p>
         </div>
-        <div className="comments-section">
-          <h3>Comentarios</h3>
-          <div className="add-comment">
-            <input
-              type="text"
-              placeholder="Agregar un comentario..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              className="comment-input"
-            />
-            <button onClick={handleAddComment} className="comment-button">Comentar</button>
+      ) : (
+        <>
+          <div className="video-player-section">
+            <div className="video-player-wrapper">
+              <ReactPlayer url={videoData.url} controls width="100%" className="video-player" />
+            </div>
+            <div className="video-info">
+              <h2 className="video-title">{videoData.title}</h2>
+              <p className="video-creator">Subido por: {creatorName}</p>
+              <p className="video-description">{videoData.descripcion}</p>
+              <p>Visitas: {views}</p>
+              <div className="star-rating">
+                <ReactStars
+                  count={5}
+                  value={rating}
+                  onChange={ratingChanged}
+                  size={24}
+                  half={true}
+                  color2={"#ffd700"}
+                />
+              </div>
+              <p>Calificación: {rating} estrellas</p>
+            </div>
+            <div className="comments-section">
+              <h3>Comentarios</h3>
+              <div className="add-comment">
+                <input
+                  type="text"
+                  placeholder="Agregar un comentario..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  className="comment-input"
+                />
+                <button onClick={handleAddComment} className="comment-button">
+                  Comentar
+                </button>
+              </div>
+              <div className="comments-list">
+                {comments.length > 0 ? (
+                  comments.map((comment, index) => (
+                    <div key={index} className="comment">
+                      <div className="comment-header">
+                        <img src={defaultImage} alt="Imagen de usuario" className="comment-avatar" />
+                        <p className="comment-user">
+                          <strong>{comment.User?.name || "Usuario desconocido"}</strong> -{" "}
+                          <span className="comment-date">
+                            {new Date(comment.fecha).toLocaleString()}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="comment-text">{comment.comentario}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No hay comentarios aún.</p>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="comments-list">
-            {comments.length > 0 ? (
-              comments.map((comment, index) => (
-                <div key={index} className="comment">
-                  <div className="comment-header">
-                    <img src={defaultImage} alt="Imagen de usuario" className="comment-avatar" />
-                    <p className="comment-user">
-                      <strong>{comment.User?.name || "Usuario desconocido"}</strong> - <span className="comment-date">{new Date(comment.fecha).toLocaleString()}</span>
-                    </p>
-                  </div>
-                  <p className="comment-text">{comment.comentario}</p>
+
+          <div className="suggestions-section">
+            <h3>Videos Sugeridos</h3>
+            {suggestedVideos.length > 0 ? (
+              suggestedVideos.map((video) => (
+                <div
+                  key={video.idvideo}
+                  className="suggestion-card"
+                  onClick={() => navigate(`/video/${video.idvideo}`)}
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${getYouTubeID(video.url)}/0.jpg`}
+                    alt={video.title}
+                    className="suggestion-thumbnail"
+                  />
+                  <p className="suggestion-title">{video.title}</p>
                 </div>
               ))
             ) : (
-              <p>No hay comentarios aún.</p>
+              <p>No hay sugerencias para mostrar.</p>
             )}
           </div>
-        </div>
-      </div>
-      
-      <div className="suggestions-section">
-        <h3>Videos Sugeridos</h3>
-        {suggestedVideos.length > 0 ? (
-          suggestedVideos.map((video) => (
-            <div key={video.idvideo} className="suggestion-card" onClick={() => navigate(`/video/${video.idvideo}`)}>
-              <img src={`https://img.youtube.com/vi/${getYouTubeID(video.url)}/0.jpg`} alt={video.title} className="suggestion-thumbnail" />
-              <p className="suggestion-title">{video.title}</p> 
-            </div>
-          ))
-        ) : (
-          <p>No hay sugerencias para mostrar.</p>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 };

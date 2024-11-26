@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomeComponent.css";
 import ImgHome1 from "../../assets/imagenes/ImgHome1.png";
 import ImgHome2 from "../../assets/imagenes/ImgHome2.png";
@@ -9,6 +9,7 @@ import ComprarIcon from "../../icons/compraricon.jsx";
 import LogoConRelleno from "../../icons/logoconrelleno.jsx";
 import HomeOfertaComponent from "../../components/HomeOfertaComponent/HomeOfertaComponent";
 import CuponComponent from "../../components/CuponComponent/CuponComponent";
+import { MdWifiOff } from "react-icons/md";
 
 const pestanas = [
   {
@@ -36,9 +37,42 @@ const pestanas = [
 
 const HomeComponent = () => {
   const [pestanaActiva, setPestanaActiva] = useState("pestana-1");
+  
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  // Nuevo useEffect para manejar la conexión a Internet
+  useEffect(() => {
+    const handleOffline = () => {
+      setIsOffline(true);
+      localStorage.setItem('isOffline', 'true');
+    };
+
+    const handleOnline = () => {
+      setIsOffline(false);
+      localStorage.setItem('isOffline', 'false');
+    };
+
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
+  }, []);
 
   return (
     <div>
+      {isOffline ? (
+      <div className="no-internet-container">
+        <div className="icon-container">
+          <MdWifiOff size={80} color="#FF6347" />
+        </div>
+        <h2 className="message">¡Oops! Sin conexión a Internet</h2>
+        <p className="sub-message">Por favor, verifica tu conexión e inténtalo nuevamente.</p>
+      </div>
+    ) : (
+        <>
       <section className="seccion-oferta">
         <HomeOfertaComponent />
       </section>
@@ -95,6 +129,8 @@ const HomeComponent = () => {
       <section className="seccion-cupon">
         <CuponComponent />
       </section>
+      </>
+      )}
     </div>
   );
 };

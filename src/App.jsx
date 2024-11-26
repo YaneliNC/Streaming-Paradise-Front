@@ -26,6 +26,7 @@ import Calificaciones from './components/PerfilComponent/Calificaciones';
 import TopConsumidores from './components/PerfilComponent/TopConsumidores';
 import EditarUsuarioComponent from "./components/PerfilComponent/EditarUsuarioComponent";
 import EditarVideoForm from "./components/PerfilComponent/EditarVideoForm";
+import NoInternetComponent from "./components/NoInternetComponent/NoInternetComponent";
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 
@@ -109,6 +110,7 @@ function App() {
                     <Route path="/top-consumidores" element={<TopConsumidores />} />
                     <Route path="/editar/:id" element={<EditarUsuarioComponent />} />
                     <Route path="/editarvideo/:videoId" element={<EditarVideoForm />} />
+                    <Route path="/desconectado" element={<NoInternetComponent />} />
                   </Routes>
                 </div>
                 {footerFlag && <FooterComponent />}
