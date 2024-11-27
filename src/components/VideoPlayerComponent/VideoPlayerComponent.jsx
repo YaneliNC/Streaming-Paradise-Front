@@ -4,6 +4,7 @@ import { useUser } from "../../contexts/UserContext";
 import ReactPlayer from "react-player";
 import ReactStars from "react-stars";
 import defaultImage from "../../assets/imagenes/IMG.jpg";
+import { MdWifiOff } from 'react-icons/md';
 import "./VideoPlayerComponent.css";
 
 const VideoPlayerComponent = ({ random }) => {
@@ -19,28 +20,9 @@ const VideoPlayerComponent = ({ random }) => {
   const [views, setViews] = useState(0);
   const [suggestedVideos, setSuggestedVideos] = useState([]);
 
-  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isOffline, setIsOffline] = useState(false);
 
-  // Nuevo useEffect para manejar la conexión a Internet
-  useEffect(() => {
-    const handleOffline = () => {
-      setIsOffline(true);
-      localStorage.setItem('isOffline', 'true');
-    };
 
-    const handleOnline = () => {
-      setIsOffline(false);
-      localStorage.setItem('isOffline', 'false');
-    };
-
-    window.addEventListener('offline', handleOffline);
-    window.addEventListener('online', handleOnline);
-
-    return () => {
-      window.removeEventListener('offline', handleOffline);
-      window.removeEventListener('online', handleOnline);
-    };
-  }, []);
 
   useEffect(() => {
     const fetchVideoData = async () => {
@@ -154,12 +136,50 @@ const VideoPlayerComponent = ({ random }) => {
     }
   };
 
+  useEffect(() => {
+    // Function to check and update offline status
+    const checkOfflineStatus = () => {
+      const offlineStatus = !navigator.onLine;
+      setIsOffline(offlineStatus);
+      
+      // Log for debugging
+      console.log('Offline Status:', offlineStatus);
+      
+      // Persist in localStorage
+      localStorage.setItem('isOffline', JSON.stringify(offlineStatus));
+    };
+
+    // Initial check
+    checkOfflineStatus();
+
+    // Event listeners
+    window.addEventListener('online', checkOfflineStatus);
+    window.addEventListener('offline', checkOfflineStatus);
+
+    // Periodic check (optional but can help)
+    const intervalCheck = setInterval(checkOfflineStatus, 5000);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('online', checkOfflineStatus);
+      window.removeEventListener('offline', checkOfflineStatus);
+      clearInterval(intervalCheck);
+    };
+  }, []);
+
+  // Debug logging
+  useEffect(() => {
+    console.log('Current Offline State:', isOffline);
+  }, [isOffline]);
+
+  
+
   if (!videoData) {
     return <p>Cargando...</p>;
   }
 
   return (
-    <div className="video-layout">
+    <div>
       {isOffline ? (
         <div className="no-internet-container">
           <div className="icon-container">
@@ -170,6 +190,8 @@ const VideoPlayerComponent = ({ random }) => {
         </div>
       ) : (
         <>
+    <div className="video-layout">
+      
           <div className="video-player-section">
             <div className="video-player-wrapper">
               <ReactPlayer url={videoData.url} controls width="100%" className="video-player" />
@@ -249,8 +271,11 @@ const VideoPlayerComponent = ({ random }) => {
               <p>No hay sugerencias para mostrar.</p>
             )}
           </div>
-        </>
-      )}
+       
+   
+    </div>
+    </>
+  )}
     </div>
   );
 };
