@@ -1,220 +1,157 @@
-@media (max-width: 768px) {
-    
-    .container-paq {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 100px;
-    }
-
-    .cardp {
-        margin-bottom: 20px;
-        width: 90%;
-    }
-}
-
+/* General container for packages */
 .container-paq {
     display: flex;
     justify-content: center;
     min-height: 100vh;
     margin-top: 100px;
+    gap: 20px; /* Espaciado entre tarjetas */
 }
 
+/* Tarjeta general */
 .cardp {
     width: 300px;
-    height: 450px;
-    border-radius: 15px 15px 15px 15px;
+    height: 500px; /* Altura ajustada para consistencia */
+    border-radius: 15px;
     overflow: hidden;
     position: relative;
     transition: transform 0.4s, box-shadow 0.4s;
-
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 30px;
-}
-
-.Paq1 {
-    width: 100%;
-    height: auto;
-    position: absolute;
-}
-
-.Paq2 {
-    width: 100%;
-    height: auto;
-    position: absolute;
-}
-
-.Paq3 {
-    width: 100%;
-    height: auto;
-    position: absolute;
-}
-
-.cardp.novato::before {
-    content: none;
 }
 
 .cardp:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    transform: scale(1.04);
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.cardp::before {
-    background-color: #ffffff;;
-    color: #f26419;
-    padding: 30px 36px 10px;
-
-    transform: translate(calc(41px + 45px), -45px) rotate(45deg);
-    transform-origin: top left;
-
-    content: 'Nuevo';
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-
-    color: #0a6acb;
-}
-
+/* Encabezado de las tarjetas */
 .cardp_info {
     width: 100%;
     height: 130px;
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-
-    position: relative;
-    z-index: 0;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    background: linear-gradient(0deg, rgba(242, 100, 25, 1) 60%, rgba(246, 160, 45, 1) 100%);
 }
 
 .cardp_info::before {
-    background: rgb(242, 100, 25);
-    background: linear-gradient(0deg, rgba(242, 100, 25, 1) 60%, rgba(246, 160, 45, 1) 100%);
-
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-
     content: '';
     position: absolute;
-    left: 0;
-    right: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    opacity: 0.8;
     z-index: -1;
 }
 
 .cardp_sub {
-    color: #ffffff;;
-    margin-bottom: 10px;
-    font-size: 32px;
-    font-weight: 400;
-    letter-spacing: 1px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
 }
 
 .cardp_price {
-    color: #ffffff;;
-    font-size: 22px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin: 5px 0 0 0;
 }
 
 .cardp_priceSpan {
-    color: #ffffff;;
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
 }
 
+/* Zona blanca */
 .cardp_content {
     background-color: #ebebeb;
     width: 100%;
-    height: calc(100% - 130px);
-
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 15px 10px;
 }
 
-.cardp_rows {
-    width: 100%;
-    flex-grow: 1;
-}
-
+/* Características */
 .cardp_row {
-    color: #0a6acb;
-    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    color: #0073e6;
     text-align: center;
-    border-bottom: 3px solid #ffffff;;
-}
-
-.cardp_row:nth-of-type(odd) {
-    background-color: var(--color0);
-}
-
-.button_link {
-    color: #ffffff;;
-    background-color: #f6a02d;
-    padding: 10px 15px;
-    margin: 20px 0;
-    text-decoration: none;
-    border-radius: 50px;
-}
-
-.button_link:hover {
-    background-color: #402068!important;
-}
-
-
-.modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #ffffff;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .buy-button {
-    color: #ffffff;;
+}
+
+.cardp_row:last-of-type {
+    border-bottom: none;
+}
+
+/* Botón de compra */
+.buy-button {
     background-color: #f6a02d;
-    padding: 10px 15px;
-    margin: 20px 0;
-    text-decoration: none;
-    border-radius: 50px;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 20px;
     border: none;
-  }
-  
-  .buy-button:hover {
-    background-color: #00063d;
-  }
-  
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.buy-button:hover {
+    background-color: #ff7043;
+}
+
+/* Etiqueta "Nuevo" */
+.cardp::before {
+    content: "Nuevo";
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    background-color: white;
+    color: #0a6acb;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 15px;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* Etiqueta de descuento */
+.ribbon {
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 5px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container-paq {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .cardp {
+        width: 90%;
+    }
+}
