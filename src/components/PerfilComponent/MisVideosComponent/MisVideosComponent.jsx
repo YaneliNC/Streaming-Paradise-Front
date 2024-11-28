@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import './MisVideosComponent.css';
-import EditarVideoForm from './../EditarVideoForm';
 import { Link } from 'react-router-dom';
 
 const MisVideosComponent = ({ userId }) => {
   const [videoData, setVideoData] = useState([]);
   const [viewedVideos, setViewedVideos] = useState(new Set());
   const [openMenu, setOpenMenu] = useState(null);
-  const [editingVideoId, setEditingVideoId] = useState(null);
 
   useEffect(() => {
     const fetchVideoData = async () => {
@@ -47,7 +45,7 @@ const MisVideosComponent = ({ userId }) => {
 
   const handleMenuOption = (option, videoId) => {
     if (option === "Editar Video") {
-      setEditingVideoId(videoId);
+      // Función para editar el video
     } else if (option === "Eliminar Video") {
       handleDeleteVideo(videoId);
     }
@@ -82,51 +80,45 @@ const MisVideosComponent = ({ userId }) => {
   }
 
   return (
-    <div>
-      <div id="hits">
-        {videoData.map((video) => {
-          const isViewed = viewedVideos.has(video.idvideo);
-          return (
-            <article
-              key={video.idvideo}
-              className={`video-card ${isViewed ? "viewed" : ""}`}
-            >
-              <div className="video-player-wrapper">
-                <ReactPlayer url={video.url} controls width="100%" className="video-player" />
-              </div>
+    <div className="canvas">
+      {videoData.map((video) => {
+        const isViewed = viewedVideos.has(video.idvideo);
+        return (
+          <article key={video.idvideo} className={`video-card ${isViewed ? "viewed" : ""}`}>
+            <div className="video-player-wrapper">
+              <ReactPlayer url={video.url} controls width="100%" className="video-player" />
+            </div>
 
-              <div className="video-meta">
-                <h3
-                  className="video-title"
-                  onClick={() => markAsViewed(video.idvideo)}
-                  style={{ cursor: 'pointer', color: isViewed ? 'gray' : 'blue', textDecoration: 'underline' }}
-                >
-                  {video.title}
-                </h3>
-                <p className="video-description">{video.descripcion}</p>
-                <span className="video-genre">{video.genero}</span>
-              </div>
+            <div className="video-meta">
+              <h3
+                className="video-title"
+                onClick={() => markAsViewed(video.idvideo)}
+                style={{ cursor: 'pointer', color: isViewed ? 'gray' : 'blue', textDecoration: 'underline' }}
+              >
+                {video.title}
+              </h3>
+              <p className="video-description">{video.descripcion}</p>
+              <span className="video-genre">{video.genero}</span>
+            </div>
 
-              {/* Menú de tres puntos */}
-              <div className="menu" onClick={() => handleMenuToggle(video.idvideo)}>
-                &#x2022;&#x2022;&#x2022;
-              </div>
+            <div className="menu" onClick={() => handleMenuToggle(video.idvideo)}>
+              &#x2022;&#x2022;&#x2022;
+            </div>
 
-              <div className={`menu-dropdown ${openMenu === video.idvideo ? "open" : ""}`}>
-                <Link to={`/video/${video.idvideo}`} onClick={() => markAsViewed(video.idvideo)}>
-                  Ver Video
-                </Link>
-                <Link to={`/editarvideo/${video.idvideo}`} onClick={() => handleMenuOption("Editar Video", video.idvideo)}>
-                  Editar Video
-                </Link>
-                <a href="#" onClick={() => handleMenuOption("Eliminar Video", video.idvideo)}>Eliminar Video</a>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-
-      {editingVideoId && <EditarVideoForm videoId={editingVideoId} />}
+            <div className={`menu-dropdown ${openMenu === video.idvideo ? "open" : ""}`}>
+              <Link to={`/video/${video.idvideo}`} onClick={() => markAsViewed(video.idvideo)}>
+                Ver Video
+              </Link>
+              <Link to={`/editarvideo/${video.idvideo}`} onClick={() => handleMenuOption("Editar Video", video.idvideo)}>
+                Editar Video
+              </Link>
+              <span onClick={() => handleMenuOption("Eliminar Video", video.idvideo)}>
+                Eliminar Video
+              </span>
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
 };
