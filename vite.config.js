@@ -129,6 +129,8 @@ export default defineConfig({
           /^\/index\.html$/,
           /^\/paquetes/,
           /^\/about/,
+          /^\/sorprendeme/,
+          /^\/contacto/,
           /^\/perfil\/novato/, // Permite /perfil/novato
           /^\/perfil\/artista/, // Permite /perfil/artista
           /^\/perfil\/estrella/, // Permite /perfil/estrella

@@ -10,7 +10,6 @@ import NovatoFoto from '../../assets/imagenes/Novato-foto.png';
 import DashPerfilComponent from './DashPerfilComponent/DashPerfilComponent';
 import MisVideosComponent from './MisVideosComponent/MisVideosComponent';
 
-
 function PerfilNovato() {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
@@ -18,6 +17,7 @@ function PerfilNovato() {
   const [isEditVisible, setEditVisible] = useState(false);
   const [isDashPerfilVisible, setDashPerfilVisible] = useState(false);
   const [isMisVideosVisible, setMisVideosVisible] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false); // Estado para el modal
 
   const toggleForm = () => {
     setFormVisible(!isFormVisible);
@@ -34,21 +34,18 @@ function PerfilNovato() {
   };
 
   const handleLogout = async () => {
-    const confirmLogout = window.confirm('¿Seguro quieres cerrar la sesión?');
-    if (confirmLogout) {
-      try {
-        const response = await axios.post('https://streaming-paradise-server.onrender.com/users/logout', {
-          remember_token: user.remember_token 
-        });
-        if (response.status === 200) {
-          setUser(null); 
-          alert('Sesión cerrada exitosamente');
-          navigate('/login'); 
-        }
-      } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-        alert('Hubo un error al cerrar sesión');
+    try {
+      const response = await axios.post(
+        "https://streaming-paradise-server.onrender.com/users/logout",
+        { remember_token: user.remember_token }
+      );
+      if (response.status === 200) {
+        setUser(null); // Remover el usuario del contexto
+        navigate("/login"); // Redirigir al login
       }
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      alert("Hubo un error al cerrar sesión");
     }
   };
 
@@ -56,13 +53,13 @@ function PerfilNovato() {
     <div className="perfil-novato">
       <div className="card">
         {/* Ícono de Cerrar Sesión */}
-      <IoLogOutOutline 
-        className="logout-icon" 
-        onClick={handleLogout} 
-        size={30} 
-        color="#00063D" 
-        title="Cerrar Sesión" 
-      />
+        <IoLogOutOutline 
+          className="logout-icon" 
+          onClick={() => setShowLogoutModal(true)} // Mostrar el modal
+          size={30} 
+          color="#00063D" 
+          title="Cerrar Sesión" 
+        />
         <div className="card_load">
           <img src={NovatoFoto} alt="Perfil Novato" className="perfil-imagen" />
         </div>
@@ -110,6 +107,32 @@ function PerfilNovato() {
       {isEditVisible && (
         <div className="form-container">
           <EditarUsuarioComponent userId={user?.id} setEditVisible={setEditVisible} />
+        </div>
+      )}
+
+      {/* Modal de confirmación */}
+      {showLogoutModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>¿Estás seguro de que quieres cerrar sesión?</h2>
+            <div className="modal-actions">
+              <button
+                className="confirm-button"
+                onClick={() => {
+                  handleLogout(); // Confirmar cierre de sesión
+                  setShowLogoutModal(false); // Cerrar el modal
+                }}
+              >
+                Confirmar
+              </button>
+              <button
+                className="cancel-button"
+                onClick={() => setShowLogoutModal(false)} // Cerrar modal
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

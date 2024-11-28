@@ -106,21 +106,21 @@ const RegistroComponent = ({ handleNavbar, handleFooter }) => {
                   <input
                     type="radio"
                     name="genero"
-                    value="Hombre"
-                    checked={formData.genero === "Hombre"}
+                    value="Masculino"
+                    checked={formData.genero === "Masculino"}
                     onChange={handleChange}
                   />
-                  Hombre
+                  Masculino
                 </label>
                 <label>
                   <input
                     type="radio"
                     name="genero"
-                    value="Mujer"
-                    checked={formData.genero === "Mujer"}
+                    value="Femenino"
+                    checked={formData.genero === "Femenino"}
                     onChange={handleChange}
                   />
-                  Mujer
+                  Femenino
                 </label>
               </div>
 

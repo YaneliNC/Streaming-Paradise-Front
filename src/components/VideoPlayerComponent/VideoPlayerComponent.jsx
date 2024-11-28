@@ -4,6 +4,7 @@ import { useUser } from "../../contexts/UserContext";
 import ReactPlayer from "react-player";
 import ReactStars from "react-stars";
 import defaultImage from "../../assets/imagenes/IMG.jpg";
+import { MdWifiOff } from 'react-icons/md';
 import "./VideoPlayerComponent.css";
 
 const VideoPlayerComponent = ({ random }) => {
@@ -18,6 +19,10 @@ const VideoPlayerComponent = ({ random }) => {
   const [rating, setRating] = useState(0);
   const [views, setViews] = useState(0);
   const [suggestedVideos, setSuggestedVideos] = useState([]);
+
+  const [isOffline, setIsOffline] = useState(false);
+
+
 
   useEffect(() => {
     const fetchVideoData = async () => {
@@ -131,78 +136,146 @@ const VideoPlayerComponent = ({ random }) => {
     }
   };
 
+  useEffect(() => {
+    // Function to check and update offline status
+    const checkOfflineStatus = () => {
+      const offlineStatus = !navigator.onLine;
+      setIsOffline(offlineStatus);
+      
+      // Log for debugging
+      console.log('Offline Status:', offlineStatus);
+      
+      // Persist in localStorage
+      localStorage.setItem('isOffline', JSON.stringify(offlineStatus));
+    };
+
+    // Initial check
+    checkOfflineStatus();
+
+    // Event listeners
+    window.addEventListener('online', checkOfflineStatus);
+    window.addEventListener('offline', checkOfflineStatus);
+
+    // Periodic check (optional but can help)
+    const intervalCheck = setInterval(checkOfflineStatus, 5000);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('online', checkOfflineStatus);
+      window.removeEventListener('offline', checkOfflineStatus);
+      clearInterval(intervalCheck);
+    };
+  }, []);
+
+  // Debug logging
+  useEffect(() => {
+    console.log('Current Offline State:', isOffline);
+  }, [isOffline]);
+
+  
+
   if (!videoData) {
     return <p>Cargando...</p>;
   }
 
   return (
+    <div>
+      {isOffline ? (
+        <div className="no-internet-container">
+          <div className="icon-container">
+            <MdWifiOff size={80} color="#FF6347" />
+          </div>
+          <h2 className="message">¡Oops! Sin conexión a Internet</h2>
+          <p className="sub-message">Por favor, verifica tu conexión e inténtalo nuevamente.</p>
+        </div>
+      ) : (
+        <>
     <div className="video-layout">
-      <div className="video-player-section">
-        <div className="video-player-wrapper">
-          <ReactPlayer url={videoData.url} controls width="100%" className="video-player" />
-        </div>
-        <div className="video-info">
-          <h2 className="video-title">{videoData.title}</h2>
-          <p className="video-creator">Subido por: {creatorName}</p>
-          <p className="video-description">{videoData.descripcion}</p>
-          <p>Visitas: {views}</p>
-          <div className="star-rating">
-            <ReactStars
-              count={5}
-              value={rating}
-              onChange={ratingChanged}
-              size={24}
-              half={true}
-              color2={"#ffd700"}
-            />
+      
+          <div className="video-player-section">
+            <div className="video-player-wrapper">
+              <ReactPlayer url={videoData.url} controls width="100%" className="video-player" />
+            </div>
+            <div className="video-info">
+              <h2 className="video-title">{videoData.title}</h2>
+              <p className="video-creator">Subido por: {creatorName}</p>
+              <p className="video-description">{videoData.descripcion}</p>
+              <p>Visitas: {views}</p>
+              <div className="star-rating">
+                <ReactStars
+                  count={5}
+                  value={rating}
+                  onChange={ratingChanged}
+                  size={24}
+                  half={true}
+                  color2={"#ffd700"}
+                />
+              </div>
+              <p>Calificación: {rating} estrellas</p>
+            </div>
+            <div className="comments-section">
+              <h3>Comentarios</h3>
+              <div className="add-comment">
+                <input
+                  type="text"
+                  placeholder="Agregar un comentario..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  className="comment-input"
+                />
+                <button onClick={handleAddComment} className="comment-button">
+                  Comentar
+                </button>
+              </div>
+              <div className="comments-list">
+                {comments.length > 0 ? (
+                  comments.map((comment, index) => (
+                    <div key={index} className="comment">
+                      <div className="comment-header">
+                        <img src={defaultImage} alt="Imagen de usuario" className="comment-avatar" />
+                        <p className="comment-user">
+                          <strong>{comment.User?.name || "Usuario desconocido"}</strong> -{" "}
+                          <span className="comment-date">
+                            {new Date(comment.fecha).toLocaleString()}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="comment-text">{comment.comentario}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No hay comentarios aún.</p>
+                )}
+              </div>
+            </div>
           </div>
-          <p>Calificación: {rating} estrellas</p>
-        </div>
-        <div className="comments-section">
-          <h3>Comentarios</h3>
-          <div className="add-comment">
-            <input
-              type="text"
-              placeholder="Agregar un comentario..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              className="comment-input"
-            />
-            <button onClick={handleAddComment} className="comment-button">Comentar</button>
-          </div>
-          <div className="comments-list">
-            {comments.length > 0 ? (
-              comments.map((comment, index) => (
-                <div key={index} className="comment">
-                  <div className="comment-header">
-                    <img src={defaultImage} alt="Imagen de usuario" className="comment-avatar" />
-                    <p className="comment-user">
-                      <strong>{comment.User?.name || "Usuario desconocido"}</strong> - <span className="comment-date">{new Date(comment.fecha).toLocaleString()}</span>
-                    </p>
-                  </div>
-                  <p className="comment-text">{comment.comentario}</p>
+
+          <div className="suggestions-section">
+            <h3>Videos Sugeridos</h3>
+            {suggestedVideos.length > 0 ? (
+              suggestedVideos.map((video) => (
+                <div
+                  key={video.idvideo}
+                  className="suggestion-card"
+                  onClick={() => navigate(`/video/${video.idvideo}`)}
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${getYouTubeID(video.url)}/0.jpg`}
+                    alt={video.title}
+                    className="suggestion-thumbnail"
+                  />
+                  <p className="suggestion-title">{video.title}</p>
                 </div>
               ))
             ) : (
-              <p>No hay comentarios aún.</p>
+              <p>No hay sugerencias para mostrar.</p>
             )}
           </div>
-        </div>
-      </div>
-      
-      <div className="suggestions-section">
-        <h3>Videos Sugeridos</h3>
-        {suggestedVideos.length > 0 ? (
-          suggestedVideos.map((video) => (
-            <div key={video.idvideo} className="suggestion-card" onClick={() => navigate(`/video/${video.idvideo}`)}>
-              <img src={`https://img.youtube.com/vi/${getYouTubeID(video.url)}/0.jpg`} alt={video.title} className="suggestion-thumbnail" />
-              <p className="suggestion-title">{video.title}</p> 
-            </div>
-          ))
-        ) : (
-          <p>No hay sugerencias para mostrar.</p>
-        )}
-      </div>
+       
+   
+    </div>
+    </>
+  )}
     </div>
   );
 };

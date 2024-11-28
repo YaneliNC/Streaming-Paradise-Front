@@ -1,4 +1,3 @@
-// src/components/TopGeneroComponent.js
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from 'axios';
@@ -6,16 +5,16 @@ import './EstadisticasComponent.css';
 
 const TopGeneroComponent = () => {
   const [chartData, setChartData] = useState({
-    series: [],
+    series: [{ data: [] }],
     options: {
       chart: {
-        type: 'bar', // Cambia el tipo de gráfico a 'bar'
-        height: 220, // Altura de la gráfica
+        type: 'bar',
+        height: 200,
       },
-      colors: ['#FF69B4', '#1E90FF', '#FFD700'], // Colores para los géneros
       xaxis: {
         categories: [], // Aquí se asignarán los nombres de los géneros
       },
+      colors: ['#FF69B4', '#1E90FF', '#FFD700'], // Colores para los géneros
       legend: {
         position: 'right',
         horizontalAlign: 'center',
@@ -30,37 +29,30 @@ const TopGeneroComponent = () => {
           vertical: 5,
         },
       },
-      
     },
   });
 
   useEffect(() => {
-    const fetchGeneros = async () => {
-      try {
-        const response = await axios.get('https://streaming-paradise-server.onrender.com/top-generos-favoritos');
+    axios.get('https://streaming-paradise-server.onrender.com/top-generos-favoritos')
+      .then(response => {
         const data = response.data;
-
-        // Extraemos los nombres de los géneros y las cantidades
-        const nombres = data.map(item => item.favoriteGenre);
-        const cantidades = data.map(item => item.cantidad_vistos);
-
+        console.log(data); // Verifica la respuesta aquí
+        const nombres = data.map(item => item.favoritegenre);  // Cambié a 'favoritegenre'
+        const cantidades = data.map(item => parseInt(item.cantidad_vistos, 10));
+        
         setChartData(prevData => ({
           ...prevData,
-          series: [{ name: 'Vistas', data: cantidades }], // Asignamos las cantidades a la serie
+          series: [{ data: cantidades }],
           options: {
             ...prevData.options,
             xaxis: {
-              categories: nombres, // Asignamos los nombres de los géneros a las categorías
+              categories: nombres,
             },
           },
         }));
-      } catch (error) {
-        console.error('Error al obtener los géneros favoritos:', error);
-      }
-    };
-
-    fetchGeneros();
-  }, []);
+      })
+      .catch(error => console.error('Error al obtener los géneros favoritos:', error));
+  }, []); // Solo se ejecuta una vez al montar el componente
 
   return (
     <div className="chart-container">
@@ -68,7 +60,7 @@ const TopGeneroComponent = () => {
       <ReactApexChart
         options={chartData.options}
         series={chartData.series}
-        type="bar" // Asegúrate de que el tipo de gráfico sea 'bar'
+        type="bar"
         height="210"
       />
     </div>
