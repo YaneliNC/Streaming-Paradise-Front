@@ -167,18 +167,18 @@ const PaquetesComponent = () => {
         </div>
       )}
 
-      {/* Paquete Novato */}
-      <div className="cardp">
-        <div className="cardp_info">
-          <img src={Paq1} alt="Paquete Novato" className="Paq1" />
-          <h2 className="cardp_sub">Novato</h2>
-          <p className="cardp_price">$50.00 <span className="cardp_priceSpan">/mes</span></p>
-        </div>
-        <div className="cardp_content">
-          <p className="cardp_row">Sube tus vídeos</p>
-          <button className="buy-button" onClick={() => setSelectedPackage('50')}>Comprar</button>
-        </div>
-      </div>
+{/* Paquete Novato */}
+<div className="cardp no-label">
+  <div className="cardp_info">
+    <img src={Paq1} alt="Paquete Novato" className="Paq1" />
+    <h2 className="cardp_sub">Novato</h2>
+    <p className="cardp_price">$50.00 <span className="cardp_priceSpan">/mes</span></p>
+  </div>
+  <div className="cardp_content">
+    <p className="cardp_row">Sube tus vídeos</p>
+    <button className="buy-button" onClick={() => setSelectedPackage('50')}>Comprar</button>
+  </div>
+</div>
 
       {/* Paquete Artista */}
       <div className="cardp">
