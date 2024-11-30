@@ -25,7 +25,7 @@ const PaquetesComponent = () => {
 
     const fetchCoupons = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/coupons/cupones');
+        const response = await axios.get('https://streaming-paradise-server.onrender.com/coupons/cupones');
         if (response.status === 200) {
           setCoupons(response.data);
         }
@@ -77,8 +77,9 @@ const PaquetesComponent = () => {
         new_role: roleMapping[selectedPackage],
         coupon_code: selectedCoupon ? selectedCoupon.codigo : null,
       };
-
-      const paymentResponse = await axios.post('http://localhost:5000/payments/capture', transactionData);
+      //http://localhost:5000/payments/capture
+      
+      const paymentResponse = await axios.post('https://streaming-paradise-server.onrender.com/purchase/compras', transactionData);
 
       if (paymentResponse.status === 201) {
         const updatedUser = { ...user, idrol: roleMapping[selectedPackage] };
