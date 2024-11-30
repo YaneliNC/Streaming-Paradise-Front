@@ -79,7 +79,7 @@ const PaquetesComponent = () => {
       };
       //http://localhost:5000/payments/capture
       
-      const paymentResponse = await axios.post('https://streaming-paradise-server.onrender.com/purchase/compras', transactionData);
+      const paymentResponse = await axios.post('https://streaming-paradise-server.onrender.com/payments/capture', transactionData);
 
       if (paymentResponse.status === 201) {
         const updatedUser = { ...user, idrol: roleMapping[selectedPackage] };
