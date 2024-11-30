@@ -1,3 +1,70 @@
+.Cupon-bar {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  margin: 20px auto;
+  transform: scale(1.1); 
+  transform-origin: center;
+  transition: transform 0.3s ease; 
+}
+
+.Cupon-bar:hover {
+  transform: scale(1.25); 
+}
+
+.Cupon-header {
+  background: linear-gradient(to right, #ff9800, #f57c00);
+  color: white;
+  padding: 10px 0;
+  border-radius: 10px 10px 0 0;
+  font-weight: bold;
+  font-size: 1.4rem; 
+  margin-bottom: 10px;
+}
+
+.Cupon-code {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.Cupon-description {
+  color: #007bff;
+  font-size: 1rem; 
+  padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+
+  .Cupon-bar {
+    transform: scale(1); 
+    max-width: 90%; 
+    margin: 10px auto; 
+    padding: 0px; 
+  }
+
+  .Cupon-bar:hover {
+    transform: scale(1.1); 
+  }
+
+  .Cupon-header {
+    font-size: 1.2rem; 
+    padding: 8px 0; 
+  }
+
+  .Cupon-code {
+    font-size: 1.4rem;
+  }
+
+  .Cupon-description {
+    font-size: 0.9rem; 
+    padding-bottom: 15px; 
+  }
+}
+
+
 @media (max-width: 768px) {
     
   .container-paq {
